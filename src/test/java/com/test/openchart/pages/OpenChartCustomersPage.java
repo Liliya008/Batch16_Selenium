@@ -1,10 +1,7 @@
 package com.test.openchart.pages;
 
 import Utils.BrowserUtils;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -45,15 +42,20 @@ public class OpenChartCustomersPage {
         BrowserUtils.scrollWithJS(driver, this.password);
         this.password.sendKeys(password);
         this.confirmPassword.sendKeys(confirmPassword);
-
         Thread.sleep(1000);
-        List<WebElement> allCheckBoxes= new ArrayList<>();
+        List<WebElement> allCheckBoxes= driver.findElements(By.xpath("//input[@type='checkbox']"));
+        Thread.sleep(2000);
+        BrowserUtils.scrollWithJS(driver,AllCheckBox);
+        Thread.sleep(2000);
         for (int i = 0; i < allCheckBoxes.size(); i++) {
             if(allCheckBoxes.get(i).isDisplayed() && allCheckBoxes.get(i).isEnabled() && !allCheckBoxes.get(i).isSelected()){
+                Thread.sleep(2000);
+                BrowserUtils.scrollWithJS(driver,allCheckBoxes.get(i));
+                Thread.sleep(2000);
                 allCheckBoxes.get(i).click();
             }
         }
-
+        Thread.sleep(1000);
         BrowserUtils.scrollWithJS(driver,saveButton);
         Thread.sleep(1000);
         saveButton.click();
