@@ -10,6 +10,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class OpenChartCustomersPage {
     public OpenChartCustomersPage(WebDriver driver){
         PageFactory.initElements(driver,this);
@@ -26,12 +29,9 @@ public class OpenChartCustomersPage {
     WebElement password;
     @FindBy(css = "#input-confirm")
     WebElement confirmPassword;
-    @FindBy(css = "#input-newsletter")
-    WebElement newsLetterCheckBox;
-    @FindBy(css = "#input-status")
-    WebElement statusCheckBox;
-    @FindBy(css = "#input-safe")
-    WebElement safeCheckBox;
+    @FindBy(xpath = "//input[@type='checkbox']")
+    WebElement AllCheckBox;
+
     @FindBy(xpath = "//button[@aria-label='Save']")
     WebElement saveButton;
     @FindBy(xpath = "//div[contains(text(),' Warning')]")
@@ -47,21 +47,11 @@ public class OpenChartCustomersPage {
         this.confirmPassword.sendKeys(confirmPassword);
 
         Thread.sleep(1000);
-
-        if(newsLetterCheckBox.isDisplayed()&& newsLetterCheckBox.isEnabled()&& !newsLetterCheckBox.isSelected()){
-           BrowserUtils.scrollWithJS(driver, newsLetterCheckBox);
-            Thread.sleep(1000);
-            newsLetterCheckBox.click();
-        }
-        if(statusCheckBox.isDisplayed() && statusCheckBox.isEnabled()&& !statusCheckBox.isSelected()){
-            BrowserUtils.scrollWithJS(driver,statusCheckBox);
-            Thread.sleep(1000);
-            statusCheckBox.click();
-        }
-        if(safeCheckBox.isDisplayed()&&safeCheckBox.isEnabled()&&!safeCheckBox.isSelected()){
-            BrowserUtils.scrollWithJS(driver,safeCheckBox);
-            Thread.sleep(1000);
-            safeCheckBox.click();
+        List<WebElement> allCheckBoxes= new ArrayList<>();
+        for (int i = 0; i < allCheckBoxes.size(); i++) {
+            if(allCheckBoxes.get(i).isDisplayed() && allCheckBoxes.get(i).isEnabled() && !allCheckBoxes.get(i).isSelected()){
+                allCheckBoxes.get(i).click();
+            }
         }
 
         BrowserUtils.scrollWithJS(driver,saveButton);
