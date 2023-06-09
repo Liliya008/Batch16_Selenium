@@ -29,48 +29,60 @@ public class BankCustomerPage {
     @FindBy(xpath = "//button[@type='submit']")
     WebElement depositSubmitButton;
 
-    @FindBy(xpath = "//span[.='Deposit Successful']")
-    WebElement successfulDepositMessage;
+    @FindBy(xpath = "//span[@ng-show='message']")
+    WebElement successfulMessage;
 
     @FindBy (xpath = "//button[contains(text(),'Withdrawl')]")
     WebElement withdrawlButton;
+
+    @FindBy(xpath = "//input[@placeholder='amount']")
+    WebElement amountforDrawal;
     @FindBy(xpath = "//button[.='Withdraw']")
     WebElement withdrawSubmitButton;
 
-    @FindBy(xpath = "//span[.='Transaction successful']")
-    WebElement successfulTransaction;
-    @FindBy(xpath = "//strong[.='200']")
+
+    @FindBy(xpath = "//div[@ng-hide='noAccount']//strong[2]")
     WebElement customerBalance;
     @FindBy(xpath = "//button[contains(text(),'Transactions')]")
     WebElement transactionsButton;
-    @FindBy (xpath = "//td[.='500']")
+    @FindBy (xpath = "//tr[@id='anchor0']//td[2]")
     WebElement credit;
-    @FindBy(xpath = "//td[.='300']")
+    @FindBy(xpath = "//tr[@id='anchor1']//td[2]")
     WebElement debit;
 
-    public void CustomerPageComponentsValidation(String yourName, String expectedHeader, String amount, String expectedDepositMessage,String expectedTransactionMessage) throws InterruptedException {
+    public void loginFunctionality(String yourName, String expectedHeader){
         BrowserUtils.selectBy(this.yourName,yourName,"text");
-       loginButton.click();
+        loginButton.click();
         Assert.assertEquals(BrowserUtils.getText(header),expectedHeader);
+
+    }
+    public void depositFunctionality(String depositAmount,String expectedDepositMessage){
         depositButton.click();
-      amountForDeposit.sendKeys("500");
-      Thread.sleep(2000);
-      depositSubmitButton.click();
-      Assert.assertEquals(BrowserUtils.getText(successfulDepositMessage),expectedDepositMessage);
-      withdrawlButton.click();
+        amountForDeposit.sendKeys(depositAmount);
+        depositSubmitButton.click();
+        Assert.assertEquals(BrowserUtils.getText(successfulMessage),expectedDepositMessage);
+    }
+
+    public  void withDrawFunctionality(String withDrawlAmount, String expectedSuccessfulMessage) throws InterruptedException {
+        withdrawlButton.click();
+        Thread.sleep(500);
+        amountforDrawal.sendKeys(withDrawlAmount);
+        Thread.sleep(500);
+        withdrawSubmitButton.click();
+        Assert.assertEquals(BrowserUtils.getText(successfulMessage),expectedSuccessfulMessage);
+
+    }
+    public void transactionFunctionality() throws InterruptedException {
+        int actualCustomerBalance= Integer.parseInt(BrowserUtils.getText(customerBalance));//200
         Thread.sleep(2000);
-      amountForDeposit.sendKeys("300");
-      Thread.sleep(2000);
-      withdrawSubmitButton.click();
-      Assert.assertEquals(BrowserUtils.getText(successfulTransaction),expectedTransactionMessage);
-      Thread.sleep(2000);
-      int customerbalance = Integer.parseInt(BrowserUtils.getText(customerBalance));
-      transactionsButton.click();
-      Thread.sleep(3000);
-      Assert.assertEquals(((Integer.parseInt(BrowserUtils.getText(credit)))-(Integer.parseInt(BrowserUtils.getText(debit)))),customerbalance);
+        transactionsButton.click();
+        int expectedBalance=(Integer.parseInt(BrowserUtils.getText(credit))-Integer.parseInt(BrowserUtils.getText(debit)));
+        Assert.assertEquals(actualCustomerBalance,expectedBalance);
+    }
+
 
 
 
 
     }
-}
+

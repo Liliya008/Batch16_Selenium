@@ -9,16 +9,16 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class BankManagerTest {
+public class BankManagerTest extends  BankTestBase{
     @Test
     public void validateAddCustomerFunctionality() throws InterruptedException {
-        WebDriverManager.chromedriver().setup();
-        ChromeOptions options =new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-        ChromeDriver driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().window().maximize();
-        driver.navigate().to("https://www.globalsqa.com/angularJs-protractor/BankingProject/#/login");
+//        WebDriverManager.chromedriver().setup();
+//        ChromeOptions options =new ChromeOptions();
+//        options.addArguments("--remote-allow-origins=*");
+//        ChromeDriver driver = new ChromeDriver(options);
+//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+//        driver.manage().window().maximize();
+//        driver.navigate().to("https://www.globalsqa.com/angularJs-protractor/BankingProject/#/login");
         BankLoginPage loginPage=new BankLoginPage(driver);
         loginPage.clickManagerButton();
         BankManagerPage bankManagerPage=new BankManagerPage(driver);
@@ -26,13 +26,13 @@ public class BankManagerTest {
     }
     @Test
     public void validateOpenAccountFunctionality() throws InterruptedException {
-        WebDriverManager.chromedriver().setup();
-        ChromeOptions options =new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-        ChromeDriver driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().window().maximize();
-        driver.navigate().to("https://www.globalsqa.com/angularJs-protractor/BankingProject/#/login");
+//        WebDriverManager.chromedriver().setup();
+//        ChromeOptions options =new ChromeOptions();
+//        options.addArguments("--remote-allow-origins=*");
+//        ChromeDriver driver = new ChromeDriver(options);
+//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+//        driver.manage().window().maximize();
+//        driver.navigate().to("https://www.globalsqa.com/angularJs-protractor/BankingProject/#/login");
         BankLoginPage loginPage=new BankLoginPage(driver);
         loginPage.clickManagerButton();
         BankManagerPage bankManagerPage=new BankManagerPage(driver);
@@ -41,13 +41,13 @@ public class BankManagerTest {
     }
     @Test
     public void validateCustomerFunctionality() throws InterruptedException {
-        WebDriverManager.chromedriver().setup();
-        ChromeOptions options =new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-        ChromeDriver driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().window().maximize();
-        driver.navigate().to("https://www.globalsqa.com/angularJs-protractor/BankingProject/#/login");
+//        WebDriverManager.chromedriver().setup();
+//        ChromeOptions options =new ChromeOptions();
+//        options.addArguments("--remote-allow-origins=*");
+//        ChromeDriver driver = new ChromeDriver(options);
+//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+//        driver.manage().window().maximize();
+//        driver.navigate().to("https://www.globalsqa.com/angularJs-protractor/BankingProject/#/login");
         BankLoginPage loginPage=new BankLoginPage(driver);
         loginPage.clickManagerButton();
         BankManagerPage bankManagerPage=new BankManagerPage(driver);
