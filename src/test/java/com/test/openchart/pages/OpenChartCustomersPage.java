@@ -27,7 +27,7 @@ public class OpenChartCustomersPage {
     @FindBy(css = "#input-confirm")
     WebElement confirmPassword;
     @FindBy(xpath = "//input[@type='checkbox']")
-    WebElement AllCheckBox;
+    List<WebElement> allCheckBoxes;
 
     @FindBy(xpath = "//button[@aria-label='Save']")
     WebElement saveButton;
@@ -42,14 +42,9 @@ public class OpenChartCustomersPage {
         BrowserUtils.scrollWithJS(driver, this.password);
         this.password.sendKeys(password);
         this.confirmPassword.sendKeys(confirmPassword);
-        Thread.sleep(1000);
-        List<WebElement> allCheckBoxes= driver.findElements(By.xpath("//input[@type='checkbox']"));
-        Thread.sleep(2000);
-        BrowserUtils.scrollWithJS(driver,AllCheckBox);
         Thread.sleep(2000);
         for (int i = 0; i < allCheckBoxes.size(); i++) {
             if(allCheckBoxes.get(i).isDisplayed() && allCheckBoxes.get(i).isEnabled() && !allCheckBoxes.get(i).isSelected()){
-                Thread.sleep(2000);
                 BrowserUtils.scrollWithJS(driver,allCheckBoxes.get(i));
                 Thread.sleep(2000);
                 allCheckBoxes.get(i).click();
