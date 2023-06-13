@@ -23,7 +23,7 @@ public class OpenChartTestBase {
     }
     @AfterMethod
     public void tearDown(){
-        //driver.quit();
+        driver.quit();
     }
 }
 

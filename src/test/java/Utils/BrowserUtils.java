@@ -1,15 +1,15 @@
 package Utils;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
 import java.util.Set;
 
@@ -65,5 +65,12 @@ public class BrowserUtils {
             }
 
         }
+    }
+    public static void getScreenShot(WebDriver driver,String packageName) throws IOException {
+        File file=((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        String location=System.getProperty("st/test/java/" + packageName+"/");
+        FileUtils.copyFile(file,new File(location+System.currentTimeMillis()));
+
+
     }
 }
