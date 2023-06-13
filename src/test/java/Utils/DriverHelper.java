@@ -23,8 +23,8 @@ public class DriverHelper {
 
     public static WebDriver getDriver() {
         if (driver == null || ((RemoteWebDriver) driver).getSessionId() == null) {
-            String browser = "chrome"; // --> choose what the browser you need to run all your test
-            switch (browser) {
+           // String browser = "chrome"; // --> choose what the browser you need to run all your test
+            switch (ConfigReader.readProperty("browser")) {
                 case "chrome":
 
                     WebDriverManager.chromedriver().setup();
