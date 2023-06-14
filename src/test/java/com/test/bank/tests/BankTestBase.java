@@ -1,5 +1,6 @@
 package com.test.bank.tests;
 
+import Utils.ConfigReader;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -19,7 +20,7 @@ public class BankTestBase {
     driver = new ChromeDriver(options);
     driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     driver.manage().window().maximize();
-    driver.navigate().to("https://www.globalsqa.com/angularJs-protractor/BankingProject/#/login");
+    driver.navigate().to(ConfigReader.readProperty("BankManager_url"));
 }
 @AfterMethod
     public void tearDown(){

@@ -1,6 +1,7 @@
 package com.test.bank.pages;
 
 import Utils.BrowserUtils;
+import Utils.ConfigReader;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -55,15 +56,15 @@ public class BankManagerPage {
 
 
 
-    public void addCustomerFunctionality(WebDriver driver, String firstName, String lastName,String postCode, String expectedMessage) throws InterruptedException {
+    public void addCustomerFunctionality(WebDriver driver) throws InterruptedException {
         addCustomerButton.click();
         Thread.sleep(3000);
-        this.firstName.sendKeys(firstName);
-        this.lastName.sendKeys(lastName);
-        this.postCode.sendKeys(postCode);
+        firstName.sendKeys(ConfigReader.readProperty("Customer_name"));
+        lastName.sendKeys(ConfigReader.readProperty("Customer_lastName"));
+        postCode.sendKeys(ConfigReader.readProperty("Customer_zipCode"));
         submitAddCustomerButton.submit();
         Alert alert=driver.switchTo().alert();
-        Assert.assertTrue(alert.getText().contains(expectedMessage));
+        Assert.assertTrue(alert.getText().contains(ConfigReader.readProperty("CustomerAdded_successfulMessage")));
         alert.accept();
 
     }

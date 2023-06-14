@@ -24,7 +24,7 @@ public class BankCustomersTest extends BankTestBase {
     BankLoginPage loginPage=new BankLoginPage(driver);
         loginPage.clickManagerButton();
     BankManagerPage bankManagerPage=new BankManagerPage(driver);
-        bankManagerPage.addCustomerFunctionality(driver,"Ahmet","Baldir","60123","Customer added successfully with customer id");
+        bankManagerPage.addCustomerFunctionality(driver);
         bankManagerPage.OpenAccountFunctionality(driver,"Ahmet Baldir","Dollar","Account created successfully with account Number");
         bankManagerPage.customersFunctionality("Ahmet","Baldir","60123");
         loginPage.clickHomeButton();
